@@ -1,0 +1,13 @@
+
+<div class="blog-masthead">
+  <div class="container">
+    <nav class="blog-nav">
+      <a class="blog-nav-item <%if(cid==0){%>active<% }%>" href="/">主页</a>
+      <%for(var i=0;i<categoryList.length;i++){%>
+      <a class="blog-nav-item 
+      <%if(cid==categoryList[i].id){%>active<% }%>
+      " href="/category/<%=categoryList[i].id%>/1"><%=categoryList[i].name%></a>
+      <%}%>
+    </nav>
+  </div>
+</div>

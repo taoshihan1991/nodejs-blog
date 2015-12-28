@@ -3,23 +3,73 @@
 */
 var express=require("express");
 var router=express.Router();
-router.get('/',function(req,res,next){
+
+/*每页条数*/
+var pageSize=1;
+
+
+var getPager=function(categoryId,currentPage,callback){
+	var start=(currentPage-1)*pageSize;
+	var end=start+pageSize;
+	var condition="";
+	if(categoryId!=0){
+		condition="where category_id="+categoryId;
+	}
+	var sql="select * from article "+condition+" limit "+start+","+end;
+	global.db.query(sql,callback);
+}
+var getCount=function(categoryId,callback){
+	var condition="";
+	if(categoryId!=0){
+		condition="where category_id="+categoryId;
+	}	
+	var sql="select count(*) num from article "+condition;
+	global.db.query(sql,callback);
+}
+var getCategory=function(callback){
+	global.db.query("select * from category",callback);	
+}
+var assignIndexList=function(cid,currentPage,res){
 	/*分类*/
-	global.db.query("select * from category",function(err,categoryList){
-		global.db.query("select * from article",function(err,articleList){
-			/*分配数据*/
-			var data={
-				title:'nodejs blog',
-				categoryList:categoryList,
-				articleList:articleList
-			};
-			console.log(data);
-			/*渲染模板*/
-			res.render("home/index",data);	
-		});
-	});
+	getCategory(function(err,categoryList){
+		getCount(cid,function(err,nums){
+			getPager(cid,currentPage,function(err,articleList){
+				var nextPage=(currentPage+1)>=Math.ceil(nums[0].num/pageSize) ? Math.ceil(nums[0].num/pageSize) : currentPage+1;
+				var prePage=(currentPage-1)<=0 ? 1 : currentPage-1;
+				/*分配数据*/
+				var data={
+					title:'nodejs blog',
+					categoryList:categoryList,
+					articleList:articleList,
+					cid:cid,
+					nextPage:nextPage==0 ? 1 : nextPage,
+					prePage:prePage
+				};
+				
+				/*渲染模板*/
+				res.render("home/index",data);					
+			});
 
+		})
 
-		
+	});	
+}
+router.get('/',function(req,res,next){
+	var currentPage=1;
+	var cid=0;
+	assignIndexList(cid,currentPage,res);
 });
+/*首页分页*/
+router.get('/:page',function(req,res,next){
+	var currentPage=parseInt(req.params.page);
+	var cid=0;
+	assignIndexList(cid,currentPage,res);
+});
+/*分类列表*/
+router.get('/category/:cid/:page',function(req,res,next){
+	var cid=req.params.cid;
+	var currentPage=parseInt(req.params.page);
+	assignIndexList(cid,currentPage,res);
+});
+
 module.exports=router;

@@ -26,16 +26,7 @@
 
   <body>
 
-    <div class="blog-masthead">
-      <div class="container">
-        <nav class="blog-nav">
-          <a class="blog-nav-item active" href="#">主页</a>
-          <%for(var i=0;i<categoryList.length;i++){%>
-          <a class="blog-nav-item" href="#"><%=categoryList[i].name%></a>
-          <%}%>
-        </nav>
-      </div>
-    </div>
+<%include header.html%>
 
     <div class="container">
 
@@ -50,7 +41,7 @@
           <% for(var i=0;i<articleList.length;i++){ %>
           <div class="blog-post">
             <h2 class="blog-post-title"><%= articleList[i].title %></h2>
-            <p class="blog-post-meta">2015年12月16日21:27:13 by <a href="#">Mark</a></p>
+            <p class="blog-post-meta">2015年12月16日21:27:13 by <a href="https://github.com/taoshihan1991/nodejs-blog" target="_blank">tsh</a></p>
 
             <p><%=articleList[i].content%></p>
             <a type="button" class="btn btn-info" href="/article/<%=articleList[i].id%>">查看全文</a>
@@ -62,43 +53,15 @@
 
           <nav>
             <ul class="pager">
-              <li><a href="#">Previous</a></li>
-              <li><a href="#">Next</a></li>
+              <li><a href="/<%if(cid!=0){%>category/<%=cid%>/<%}%><%=prePage%>">Previous</a></li>
+              <li><a href="/<%if(cid!=0){%>category/<%=cid%>/<%}%><%=nextPage%>">Next</a></li>
             </ul>
           </nav>
 
         </div><!-- /.blog-main -->
 
         <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
-          <div class="sidebar-module sidebar-module-inset">
-            <h4>作者</h4>
-            <p>了解 前端 php java android nodejs</p>
-          </div>
-          <div class="sidebar-module">
-            <h4>Archives</h4>
-            <ol class="list-unstyled">
-              <li><a href="#">March 2014</a></li>
-              <li><a href="#">February 2014</a></li>
-              <li><a href="#">January 2014</a></li>
-              <li><a href="#">December 2013</a></li>
-              <li><a href="#">November 2013</a></li>
-              <li><a href="#">October 2013</a></li>
-              <li><a href="#">September 2013</a></li>
-              <li><a href="#">August 2013</a></li>
-              <li><a href="#">July 2013</a></li>
-              <li><a href="#">June 2013</a></li>
-              <li><a href="#">May 2013</a></li>
-              <li><a href="#">April 2013</a></li>
-            </ol>
-          </div>
-          <div class="sidebar-module">
-            <h4>Elsewhere</h4>
-            <ol class="list-unstyled">
-              <li><a href="#">GitHub</a></li>
-              <li><a href="#">Twitter</a></li>
-              <li><a href="#">Facebook</a></li>
-            </ol>
-          </div>
+          <%include right.html%>
         </div><!-- /.blog-sidebar -->
 
       </div><!-- /.row -->
