@@ -5,17 +5,17 @@ var express=require("express");
 var router=express.Router();
 
 /*每页条数*/
-var pageSize=1;
+var pageSize=2;
 
 
 var getPager=function(categoryId,currentPage,callback){
 	var start=(currentPage-1)*pageSize;
-	var end=start+pageSize;
+	var end=pageSize;
 	var condition="";
 	if(categoryId!=0){
 		condition="where category_id="+categoryId;
 	}
-	var sql="select * from article "+condition+" limit "+start+","+end;
+	var sql="select * from article "+condition+"  order by time desc limit "+start+","+end;
 	global.db.query(sql,callback);
 }
 var getCount=function(categoryId,callback){
@@ -29,6 +29,10 @@ var getCount=function(categoryId,callback){
 var getCategory=function(callback){
 	global.db.query("select * from category",callback);	
 }
+/*归档*/
+var getArchives=function(callback){
+	db.query("select time from article order by time desc",callback);
+}
 var assignIndexList=function(cid,currentPage,res){
 	/*分类*/
 	getCategory(function(err,categoryList){
@@ -36,18 +40,27 @@ var assignIndexList=function(cid,currentPage,res){
 			getPager(cid,currentPage,function(err,articleList){
 				var nextPage=(currentPage+1)>=Math.ceil(nums[0].num/pageSize) ? Math.ceil(nums[0].num/pageSize) : currentPage+1;
 				var prePage=(currentPage-1)<=0 ? 1 : currentPage-1;
-				/*分配数据*/
-				var data={
-					title:'nodejs blog',
-					categoryList:categoryList,
-					articleList:articleList,
-					cid:cid,
-					nextPage:nextPage==0 ? 1 : nextPage,
-					prePage:prePage
-				};
-				
-				/*渲染模板*/
-				res.render("home/index",data);					
+				getArchives(function(err,allArticleTime){
+					var newArticleTime=[];
+					for(var i=0;i<allArticleTime.length;i++){
+						newArticleTime.push(myFunction.phpDate("y年m月",allArticleTime[i].time));
+					}console.log(newArticleTime);
+					/*分配数据*/
+					var data={
+						title:'nodejs blog',
+						categoryList:categoryList,
+						articleList:articleList,
+						cid:cid,
+						nextPage:nextPage==0 ? 1 : nextPage,
+						prePage:prePage,
+						allArticleTime:newArticleTime,
+						currentPage:currentPage
+					};
+					
+					/*渲染模板*/
+					res.render("home/index",data);	
+				});
+ 				
 			});
 
 		})

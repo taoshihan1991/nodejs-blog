@@ -32,29 +32,31 @@
 
       <div class="blog-header">
         <h1 class="blog-title"><%=title%></h1>
-        <p class="lead blog-description">SnowBlog官方博客,SnowBlog是一个注重美学、易用性和网络标准的个人信息发布平台。SnowBlog虽为免费的开源软件，但其价值无法用金钱来衡量。SnowBlog的图形设计在性能上易于操作、易于浏览；在外观上优雅大方、风格清新、色彩诱人。</p>
+        <p class="lead blog-description">nodejs-blog官方博客，本博客采用nodejs+mysql+express+ejs+bootstrap架构</p>
       </div>
 
       <div class="row">
 
         <div class="col-sm-8 blog-main">
+          <%if(articleList){%>
           <% for(var i=0;i<articleList.length;i++){ %>
           <div class="blog-post">
             <h2 class="blog-post-title"><%= articleList[i].title %></h2>
-            <p class="blog-post-meta">2015年12月16日21:27:13 by <a href="https://github.com/taoshihan1991/nodejs-blog" target="_blank">tsh</a></p>
+            <p class="blog-post-meta"><%=myFunction.phpDate('y年m月d日 h:i:s',articleList[i].time)%> by <a href="https://github.com/taoshihan1991/nodejs-blog" target="_blank">tsh</a></p>
 
             <p><%=articleList[i].content%></p>
             <a type="button" class="btn btn-info" href="/article/<%=articleList[i].id%>">查看全文</a>
             <hr>
 
           </div><!-- /.blog-post -->
-          <% } %>
-         
+          <% }}else{%>
+          该查询条件没有数据
+          <%}%>
 
           <nav>
             <ul class="pager">
-              <li><a href="/<%if(cid!=0){%>category/<%=cid%>/<%}%><%=prePage%>">Previous</a></li>
-              <li><a href="/<%if(cid!=0){%>category/<%=cid%>/<%}%><%=nextPage%>">Next</a></li>
+              <li><a class="btn <%if(currentPage==prePage){%>disabled<%}%>" href="/<%if(cid!=0){%>category/<%=cid%>/<%}%><%=prePage%>">上一页</a></li>
+              <li><a class="btn <%if(currentPage==nextPage){%>disabled<%}%>" href="/<%if(cid!=0){%>category/<%=cid%>/<%}%><%=nextPage%>">下一页</a></li>
             </ul>
           </nav>
 
@@ -69,7 +71,7 @@
     </div><!-- /.container -->
 
     <footer class="blog-footer">
-      <p>SnowBlog 版权所有</p>
+      <p>nodejs-blog版权所有</p>
       <p>
         <a href="#">Back to top</a>
       </p>

@@ -18,6 +18,9 @@ global.db=db;
 /*静态文件*/
 app.use(express.static('public'));
 
+/*公共函数文件*/
+global.myFunction=require("./router/common/functions");
+
 /*路由级中间件*/
 var home=require('./router/home/index');
 app.use('/',home);

@@ -37,7 +37,7 @@
           <%if(articleInfo){%>
           <div class="blog-post">
             <h2 class="blog-post-title"><%=articleInfo.title%></h2>
-            <p class="blog-post-meta">2015年12月16日21:27:13 by <a href="#">Mark</a></p>
+            <p class="blog-post-meta"><%=myFunction.phpDate('y年m月d日 h:i:s',articleInfo.time)%> by <a href="#">tsh</a></p>
             <div>
               <%=articleInfo.content%>
             </div>
