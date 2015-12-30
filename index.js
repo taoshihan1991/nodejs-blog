@@ -1,7 +1,7 @@
 var express=require("express");
 var app=express();
 /*模板引擎*/
-app.set('views',__dirname+'\\views');
+app.set('views',__dirname+'/views');
 app.engine('.html',require("ejs").__express);
 app.set('view engine','html');
 

@@ -22,6 +22,32 @@
       <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script type="text/javascript">
+    $(function(){
+      /*折叠高度*/
+      var collHeight=75;
+      var contentObj=$(".nodeBolgIndexContent");
+      var height=contentObj.height();
+      if(height>=collHeight){
+        contentObj.css({
+          height:collHeight+'px'
+        });
+      }
+      $(".nodeBolgIndexBtn").click(function(){
+        var obj=$(this).parents(".blog-post").find(".nodeBolgIndexContent");
+        var mySwitch=$(this).attr('data-switch');
+        if(obj.height()>=collHeight&&mySwitch==1){
+          obj.css({height:'auto'});
+          $(this).html("折叠全文").attr("data-switch",0);
+        }
+        if(mySwitch==0){
+          obj.css({height:collHeight+'px'});
+          $(this).html("查看全文").attr("data-switch",1);
+        }
+      });
+    });
+    </script>
   </head>
 
   <body>
@@ -30,22 +56,25 @@
 
     <div class="container">
 
-      <div class="blog-header">
-        <h1 class="blog-title"><%=title%></h1>
-        <p class="lead blog-description">nodejs-blog官方博客，本博客采用nodejs+mysql+express+ejs+bootstrap架构</p>
-      </div>
+      
 
       <div class="row">
 
+        
+
         <div class="col-sm-8 blog-main">
+          <div class="blog-header">
+          <h1 class="blog-title"><%=title%></h1>
+          <p class="lead blog-description">nodejs-blog官方博客，本博客采用nodejs+mysql+express+ejs+bootstrap架构</p>
+          </div>
           <%if(articleList){%>
           <% for(var i=0;i<articleList.length;i++){ %>
           <div class="blog-post">
             <h2 class="blog-post-title"><%= articleList[i].title %></h2>
             <p class="blog-post-meta"><%=myFunction.phpDate('y年m月d日 h:i:s',articleList[i].time)%> by <a href="https://github.com/taoshihan1991/nodejs-blog" target="_blank">tsh</a></p>
 
-            <p><%=articleList[i].content%></p>
-            <a type="button" class="btn btn-info" href="/article/<%=articleList[i].id%>">查看全文</a>
+            <div class="nodeBolgIndexContent"><%=articleList[i].content%></div>
+            <a class="btn btn-info nodeBolgIndexBtn" href="jjavascript:void(0)" data-switch=1>查看全文</a>
             <hr>
 
           </div><!-- /.blog-post -->
