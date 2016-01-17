@@ -84,8 +84,10 @@
 
           <nav>
             <ul class="pager">
-              <li><a class="btn <%if(currentPage==prePage){%>disabled<%}%>" href="/<%if(cid!=0){%>category/<%=cid%>/<%}%><%=prePage%>">上一页</a></li>
-              <li><a class="btn <%if(currentPage==nextPage){%>disabled<%}%>" href="/<%if(cid!=0){%>category/<%=cid%>/<%}%><%=nextPage%>">下一页</a></li>
+              <li><a class="btn <%if(currentPage==prePage){%>disabled<%}%>" 
+                href="/<%if(cid!=0){%>category/<%=cid%>/<%}else{%>index/<%}%><%=prePage%>">上一页</a></li>
+              <li><a class="btn <%if(currentPage==nextPage){%>disabled<%}%>" 
+                href="/<%if(cid!=0){%>category/<%=cid%>/<%}else{%>index/<%}%><%=nextPage%>">下一页</a></li>
             </ul>
           </nav>
 

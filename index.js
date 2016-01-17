@@ -24,8 +24,8 @@ global.myFunction=require("./router/common/functions");
 /*路由级中间件*/
 var home=require('./router/home/index');
 app.use('/',home);
-var article=require('./router/home/article');
-app.use('/',article);
+// var article=require('./router/home/article');
+// app.use('/',article);
 var admin=require('./router/admin/index');
 app.use('/admin',admin);
 

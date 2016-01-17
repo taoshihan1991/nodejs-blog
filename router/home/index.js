@@ -73,7 +73,7 @@ router.get('/',function(req,res,next){
 	assignIndexList(cid,currentPage,res);
 });
 /*首页分页*/
-router.get('/:page',function(req,res,next){
+router.get('/index/:page',function(req,res,next){
 	var currentPage=parseInt(req.params.page);
 	var cid=0;
 	assignIndexList(cid,currentPage,res);
