@@ -73,7 +73,7 @@
             <h2 class="blog-post-title"><%= articleList[i].title %></h2>
             <p class="blog-post-meta"><%=myFunction.phpDate('y年m月d日 h:i:s',articleList[i].time)%> by <a href="https://github.com/taoshihan1991/nodejs-blog" target="_blank">tsh</a></p>
 
-            <div class="nodeBolgIndexContent"><%=articleList[i].content%></div>
+            <div class="nodeBolgIndexContent"><%-articleList[i].content.replace(new RegExp(/\n/g),"<br/>")%></div>
             <a class="btn btn-info nodeBolgIndexBtn" href="jjavascript:void(0)" data-switch=1>查看全文</a>
             <hr>
 
@@ -103,9 +103,6 @@
 
     <footer class="blog-footer">
       <p>nodejs-blog版权所有</p>
-      <p>
-        <a href="#">Back to top</a>
-      </p>
     </footer>
 
   </body>

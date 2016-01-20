@@ -43,11 +43,11 @@
       <%for(var i=0;i<articleList.length;i++){%>
       <tr>
         <td><%=articleList[i].id%></td>
-        <td><a href=""><%=articleList[i].title%></a></td>
+        <td><a href="/admin/article/edit/<%=articleList[i].id%>"><%=articleList[i].title%></a></td>
         <td><%=myFunction.phpDate('y年m月d日 h:i:s',articleList[i].time)%></td>
         <td>
-          <a href="">编辑</a>
-          <a href="">删除</a>
+          <a href="/admin/article/edit/<%=articleList[i].id%>">[ 编辑 ]</a>&nbsp;&nbsp;
+          <a href="/admin/article/del/<%=articleList[i].id%>">[ 删除 ]</a>
         </td>
       </tr>
       <%}%>
