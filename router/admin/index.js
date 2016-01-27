@@ -3,7 +3,11 @@
 */
 var express=require("express");
 var router=express.Router();
+/*登陆*/
+router.use("/login",require("./login"));
 
+/*验证权限*/ 
+require("./auth")(router);
 
 /*每页条数*/
 var pageSize=2;

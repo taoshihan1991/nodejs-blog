@@ -7,6 +7,8 @@ var bodyParser = require('body-parser');
 
 router.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
+/*验证权限*/ 
+require("./auth")(router);
 
 var getCategory=function(callback){
 	global.db.query("select * from category",callback);	

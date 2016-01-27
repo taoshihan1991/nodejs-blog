@@ -4,3 +4,24 @@
 .nbArticleAdd{
 	width:600px;
 }
+
+.nbLoginBox{
+	width: 500px;
+	height: 200px;
+	margin: 0 auto;
+	border:1px solid #ccc;
+	margin-top: 100px;
+	font-family: "Microsoft jhengHei";
+	text-align: center;
+}
+.nbLoginBox .nbloginTitle{
+	text-align: center;
+	font-size:18px;
+	margin: 10px 0;
+	margin-bottom: 50px;
+}
+.nbLoginBox  .nbLoginInput{
+	height: 35px;
+	line-height: 35px;
+	border:2px solid #ccc;
+}
