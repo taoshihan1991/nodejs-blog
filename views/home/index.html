@@ -29,11 +29,10 @@
       var collHeight=75;
       var contentObj=$(".nodeBolgIndexContent");
       var height=contentObj.height();
-      if(height>=collHeight){
-        contentObj.css({
+      contentObj.css({
           height:collHeight+'px'
-        });
-      }
+      });
+      
       $(".nodeBolgIndexBtn").click(function(){
         var obj=$(this).parents(".blog-post").find(".nodeBolgIndexContent");
         var mySwitch=$(this).attr('data-switch');

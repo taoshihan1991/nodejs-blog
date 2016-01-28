@@ -7,23 +7,30 @@
             <ol class="list-unstyled">
               <%
               var temp=[];
-              var numArr=[];
-              var k=0;
+
               for(var i=0;i<allArticleTime.length;i++){
-                var num=1;
-                if((temp.indexOf(allArticleTime[i]))==-1){
-                  temp.push(allArticleTime[i]);
-                  numArr.push(num);
-                  k=i;
-                }else{
-                  numArr[k]+=1;
+                var title=allArticleTime[i];
+                var flag=false;
+                for(var j=0;j<temp.length;j++){
+                   if(temp[j].title==title){
+                    temp[j].nums+=1;
+                    flag=true;
+                    break
+                  }              
+                }
+                if(!flag){
+                    var obj={
+                      title:title,
+                      nums:1
+                      };
+                    temp.push(obj);
                 }
               }
               %>
               <%for(var j=0;j<temp.length;j++){%>
               <li><a href="#">
-                <%=temp[j]%>
-                <%=numArr[j]%>篇
+                <%=temp[j].title%>
+                <%=temp[j].nums%>篇
               </a></li>
               <%}%>
             </ol>

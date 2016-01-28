@@ -2,7 +2,18 @@
 * 后台首页控制器
 */
 var express=require("express");
+var session=require("express-session");
+var cookieParser = require('cookie-parser');
 var router=express.Router();
+router.use(cookieParser());
+router.use(session({
+	secret: '12345',
+    name: 'nodejs-blog',   //这里的name值得是cookie的name，默认cookie的name是：connect.sid
+    cookie: {maxAge: 8000000 },  //设置maxAge是80000ms，即80s后session和相应的cookie失效过期
+    resave: false,
+    saveUninitialized: true,
+}));
+
 /*登陆*/
 router.use("/login",require("./login"));
 
@@ -10,7 +21,7 @@ router.use("/login",require("./login"));
 require("./auth")(router);
 
 /*每页条数*/
-var pageSize=2;
+var pageSize=10;
 
 
 var getPager=function(categoryId,currentPage,callback){

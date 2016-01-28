@@ -5,7 +5,7 @@ var express=require("express");
 var router=express.Router();
 
 /*每页条数*/
-var pageSize=2;
+var pageSize=5;
 
 
 var getPager=function(categoryId,currentPage,callback){
@@ -44,7 +44,7 @@ var assignIndexList=function(cid,currentPage,res){
 					var newArticleTime=[];
 					for(var i=0;i<allArticleTime.length;i++){
 						newArticleTime.push(myFunction.phpDate("y年m月",allArticleTime[i].time));
-					}console.log(newArticleTime);
+					}
 					/*分配数据*/
 					var data={
 						title:'nodejs blog',
