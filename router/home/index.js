@@ -27,7 +27,8 @@ var getCount=function(categoryId,callback){
 	global.db.query(sql,callback);
 }
 var getCategory=function(callback){
-	global.db.query("select * from category",callback);	
+	myFunction.D("category").getAll(callback);
+	//global.db.query("select * from category",callback);	
 }
 /*归档*/
 var getArchives=function(callback){

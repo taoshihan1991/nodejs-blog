@@ -23,6 +23,10 @@ var myFunction={
 			formatStr=formatStr.replace(paramModel.charAt(i), strTimeArr[i]);                 
 		}
 		return formatStr;
+	},
+	D:function(name){
+		return require("../model/category");
 	}
+
 };
 module.exports=myFunction;
