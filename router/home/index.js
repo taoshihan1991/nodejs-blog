@@ -48,7 +48,7 @@ var assignIndexList=function(cid,currentPage,res){
 					}
 					/*分配数据*/
 					var data={
-						title:'nodejs blog',
+						title:'Nodejs-Blog基于Express框架的Blog系统',
 						categoryList:categoryList,
 						articleList:articleList,
 						cid:cid,

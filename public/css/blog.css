@@ -220,9 +220,10 @@ p{
   color: #666;
 }
 .nbIndexMainTitle{
-  font: 3em "Helvetica Neue", "Open Sans", sans-serif;
+  font-family: "Microsoft JhengHei";
+  font-size: 46px;
   font-weight: 100;
-  color: #353535;
+  color: #616060;
   margin-bottom: .25em;
   margin-top: 10px;
 }
@@ -230,4 +231,7 @@ p{
   font:normal 46px/1.6 "Helvetica Neue","Helvetica","Lucida Grande","Arial","Hiragino Sans GB","Microsoft Yahei","WenQuanYi Micro Hei","sans-serif";
   color:#aeaeae;
   margin-bottom: 20px;
+}
+.nbIndexMainIntro .blue{
+  color:#259dff;
 }
