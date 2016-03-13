@@ -1,7 +1,8 @@
 /**
 * 公共函数文件
 */
-var myFunction={
+module.exports={
+	/*模拟php的date()函数*/
 	phpDate:function(formatStr,time){
 		var paramModel='ymdhis';
 		if(!formatStr) formatStr="y-m-d h:i:s";
@@ -24,9 +25,9 @@ var myFunction={
 		}
 		return formatStr;
 	},
-	D:function(name){
-		return require("../model/category");
+	/*实例化模型*/
+	model:function(name){
+		return require("../model/"+name);
 	}
 
 };
-module.exports=myFunction;

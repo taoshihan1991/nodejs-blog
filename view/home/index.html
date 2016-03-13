@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="../../favicon.ico">
+    <title>Nodejs-Blog - 基于 Express 框架的个人博客</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/blog.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script type="text/javascript">
+    $(function(){
+      /*折叠高度*/
+      var collHeight=75;
+      var contentObj=$(".nodeBolgIndexContent");
+      var height=contentObj.height();
+      contentObj.css({
+          height:collHeight+'px'
+      });
+      
+      $(".nodeBolgIndexBtn").click(function(){
+        var obj=$(this).parents(".blog-post").find(".nodeBolgIndexContent");
+        var mySwitch=$(this).attr('data-switch');
+        if(obj.height()>=collHeight&&mySwitch==1){
+          obj.css({height:'auto'});
+          $(this).html("折叠全文").attr("data-switch",0);
+        }
+        if(mySwitch==0){
+          obj.css({height:collHeight+'px'});
+          $(this).html("查看全文").attr("data-switch",1);
+        }
+      });
+    });
+    </script>
+  </head>
+
+  <body>
+
+<%include header.html%>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 blog-main">
+
+
+          <div class="nbIndexMainTitle">
+            Nodejs-Blog
+          </div>
+          <div class="nbIndexMainIntro">
+            基于<span class="blue">Express</span>框架的快速·开放·极简的Blog系统
+          </div>
+
+          <%if(articleList){%>
+          <% for(var i=0;i<articleList.length;i++){ %>
+          <div class="blog-post">
+            <h2 class="blog-post-title"><%= articleList[i].title %></h2>
+            <p class="blog-post-meta"><%=F.phpDate('y年m月d日 h:i:s',articleList[i].time)%> by <a href="https://github.com/taoshihan1991/nodejs-blog" target="_blank">tsh</a></p>
+
+            <div class="nodeBolgIndexContent"><%-articleList[i].content.replace(new RegExp(/\n/g),"<br/>")%></div>
+            <a class="btn btn-info nodeBolgIndexBtn" href="jjavascript:void(0)" data-switch=1>查看全文</a>
+            <hr>
+
+          </div><!-- /.blog-post -->
+          <% }}else{%>
+          该查询条件没有数据
+          <%}%>
+
+          <nav>
+            <ul class="pager">
+              <li><a class="btn <%if(currentPage==prePage){%>disabled<%}%>" 
+                href="/<%if(cid!=0){%>category/<%=cid%>/<%}else{%>index/<%}%><%=prePage%>">上一页</a></li>
+              <li><a class="btn <%if(currentPage==nextPage){%>disabled<%}%>" 
+                href="/<%if(cid!=0){%>category/<%=cid%>/<%}else{%>index/<%}%><%=nextPage%>">下一页</a></li>
+            </ul>
+          </nav>
+
+        </div><!-- /.blog-main -->
+
+        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+          <%include right.html%>
+        </div><!-- /.blog-sidebar -->
+
+      </div><!-- /.row -->
+
+    </div><!-- /.container -->
+
+    <footer class="blog-footer">
+      <p>&copy; Nodejs-Blog 官方网站 2016</p>
+    </footer>
+
+  </body>
+</html>

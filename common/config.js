@@ -6,5 +6,6 @@ module.exports={
 	DB_NAME:'blog',
 	DB_USER:'root',
 	DB_PASS:'root',
-	DB_PRE:''
+	DB_PRE:'',
+	APP_PORT:'8888'
 };

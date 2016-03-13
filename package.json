@@ -1,21 +1,22 @@
 {
   "name": "nodejs-blog",
   "version": "1.0.0",
+  "description": "我的博客",
   "main": "index.js",
-  "dependencies": {
-    "body-parser": "^1.14.2",
-    "cookie-parser": "^1.4.1",
-    "ejs": "^2.3.4",
-    "express": "^4.13.3",
-    "express-session": "^1.13.0",
-    "multer": "^1.1.0",
-    "mysql": "^2.10.0"
-  },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "keywords": [
+    "博客"
+  ],
+  "author": "陶士涵",
   "license": "ISC",
-  "description": ""
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "cookie-parser": "^1.4.1",
+    "ejs": "^2.4.1",
+    "express": "^4.13.4",
+    "express-session": "^1.13.0",
+    "mysql": "^2.10.2"
+  }
 }

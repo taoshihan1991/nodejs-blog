@@ -1,10 +1,27 @@
 /**
-* 数据库操作类
+*分类模型
+*
 */
-var db=require("../model/db").getInstances();
 module.exports={
-	/*数据库对象*/
-	getAll:function(callback){
+	getAllList:function(callback){
 		db.select("category",callback);
+	},
+	/*添加*/
+	addCate:function(data){
+		db.add("category",data,function(err,list){
+			console.log(err);
+		});
+	},
+	/*修改*/
+	saveCate:function(data,where){
+		db.update("category",data,where,function(err,list){
+			console.log(err);
+		});
+	},
+	/*删除*/
+	delCate:function(where){
+		db.delete("category",where,function(err,list){
+			//console.log(err);
+		});
 	}
-}
+};

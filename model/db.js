@@ -4,8 +4,6 @@
 var db={
 	/*数据库对象*/
 	db:null,
-	/*配置对象*/
-	C:null,
 	/*构造函数*/
 	getInstances:function(){
 		this.connectDatabase();
@@ -14,7 +12,6 @@ var db={
 	/*链接数据库*/
 	connectDatabase:function(){
 		var mysql=require('mysql');
-		var C=require("../common/config");
 		var db=mysql.createConnection({
 			host:C.DB_HOST,
 			user:C.DB_USER,
@@ -23,15 +20,55 @@ var db={
 		});
 		db.connect();
 		this.db=db;
-		this.C=C;
 	},
+	/*查询*/ 
 	select:function(tableName,callback,where,field){
 		field=field ? field : '*';
-		var sql="select "+field+" from "+this.C.DB_PRE+tableName;
+		var sql="select "+field+" from "+C.DB_PRE+tableName;
 		if(where){
 			sql+=" where "+where;
 		}
+		console.log(sql);
 		this.db.query(sql,callback);
+	},
+	/*添加*/
+	add:function(tableName,tableData,callback){
+ 		var sql="insert into "+C.DB_PRE+tableName;
+ 		var clumn='';
+ 		var value='';
+ 		for(var key in tableData){
+   			clumn+=","+key;
+   			value+=",'"+tableData[key]+"'";
+  		}
+ 		clumns="("+clumn.substr(1)+")";
+		values="("+value.substr(1)+")";
+		sql=sql+clumns+"values"+values;
+		console.log(sql);
+		this.db.query(sql,callback);		
+	},
+	/*修改*/
+	update:function(tableName,tableData,where,callback){
+ 		var sql="update "+C.DB_PRE+tableName+" set ";
+ 		var clumns="";
+ 		for(var key in tableData){
+   			clumns+=","+key+"='"+tableData[key]+"'";
+  		}
+		clumns=clumns.substr(1);
+
+		sql+=clumns+" where "+where;
+		console.log(sql);
+		this.db.query(sql,callback);		
+	},
+	/*删除*/
+	delete:function(tableName,where,callback){
+ 		var sql="delete from "+C.DB_PRE+tableName+" where "+where;
+		console.log(sql);
+		this.db.query(sql,callback);		
+	},
+	/*执行sql*/
+	query:function(sql,callback){
+		console.log(sql);
+		this.db.query(sql,callback);		
 	}
 }
 module.exports=db;

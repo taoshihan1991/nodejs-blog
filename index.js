@@ -1,36 +1,37 @@
-var express=require("express");
-var app=express();
-/*模板引擎*/
-app.set('views',__dirname+'/views');
-app.engine('.html',require("ejs").__express);
-app.set('view engine','html');
+/*引入express*/ 
+global.express=require("express");
+var application=express();
 
-/*链接数据库*/
-global.db=require("./model/db").getInstances().db;
-/*静态文件*/
-app.use(express.static('public'));
+/*载入公共文件,定义资源文件*/
+global.C=require("./common/config");
+global.F=require("./common/functions"); 
+application.use(express.static('public'));
 
-/*公共函数文件*/
-global.myFunction=require("./common/functions");
+/*模板引擎*/ 
+application.set('views',__dirname+'/view');
+application.engine('.html',require("ejs").__express);
+application.set('view engine','html');
+
+/*链接数据库*/ 
+global.db=require("./model/db").getInstances();
 
 /*路由级中间件*/
-var home=require('./router/home/index');
-app.use('/',home);
-// var article=require('./router/home/article');
-// app.use('/',article);
-var admin=require('./router/admin/index');
-app.use('/admin',admin);
+application.use('/',require('./controller/home/index'));
+application.use('/admin',require('./controller/admin/index'));
+
 
 /*错误处理器*/
-app.use(function(err,req,res,next){
-	console.error(err.stack);
-	res.status(500).send("傻狍子代码出错了,错误信息:<br/>"+err.stack);
+application.use(function(err,req,res,next){
+  console.error(err.stack);
+  res.status(500).send("代码出错了,错误信息:<br/>"+err.stack);
 });
 /*404*/
-app.use(function(req,res,next){
-	res.status(404).send("404页面被火星人挖走了");
+application.use(function(req,res,next){
+  res.status(404).send("404页面被火星人挖走了");
 });
+
 /*创建服务器*/
-var server=app.listen(8888,function(){
-	console.log("start...");
+var appPort=process.env.VCAP_APP_PORT || C.APP_PORT;
+application.listen(appPort,function(){
+    console.log("application start ...");
 });
