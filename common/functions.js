@@ -28,6 +28,9 @@ module.exports={
 	/*实例化模型*/
 	model:function(name){
 		return require("../model/"+name);
+	},
+	//生成用户唯一id
+	createUserId:function(){
+		return new Date().getTime()+""+Math.floor(Math.random()*899+100);
 	}
-
 };

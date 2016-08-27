@@ -3,7 +3,7 @@
 */
 var router=express.Router();
 var bodyParser = require('body-parser');
-router.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+router.use(bodyParser.urlencoded({ extended: true }));
 /*界面*/ 
 router.get('/',function(req,res,next){
 	res.render("admin/login");

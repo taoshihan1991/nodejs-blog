@@ -93,5 +93,18 @@
       <p>&copy; Nodejs-Blog 官方网站 2016</p>
     </footer>
 
+    <!-- [评论区] -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/client.js"></script>
+    <script type="text/javascript">
+    $(function(){
+      Client.init();
+    })
+    </script>
+    <div id="commentArea" class="nbCommentArea">
+      
+      <input type='text' class="chatMessageBox" placeholder='输入信息按回车提交'/>
+    </div>
+    <!-- [//评论区] -->
   </body>
 </html>

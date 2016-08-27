@@ -235,3 +235,36 @@ p{
 .nbIndexMainIntro .blue{
   color:#259dff;
 }
+
+.nbCommentArea{
+  padding: 5px;
+  color: #fff;
+  position: fixed;
+  right: 1px;
+  bottom: 1px;
+  width: 280px;
+  height: 370px;
+  background: rgba(0,0,0,.3);
+  font-size: 12px;
+  box-shadow: -2px 2px 3px rgba(0,0,0,.4);
+
+}
+.nbCommentArea .chatLogin{
+  text-align: center;
+  margin: 2px 0px;
+}
+.nbCommentArea .chatLogin .cirtcle{
+  background: #259dff;
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+.nbCommentArea .chatMessageBox{
+  width: 100%;
+  position: absolute;
+  bottom: 1px;
+  left: 0;
+  height: 25px;
+  line-height: 25px;
+  border:1px solid #cce1ef;
+  color: #333;
+}
