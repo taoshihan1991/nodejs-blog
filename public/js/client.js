@@ -1,5 +1,5 @@
 var Client={
-	url:"ws://localhost:8888",
+	url:"ws://localhost:5050",
 	socket:null,
 	userId:0,
 	userName:"",

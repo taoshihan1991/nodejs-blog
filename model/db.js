@@ -12,15 +12,21 @@ var db={
 	/*链接数据库*/
 	connectDatabase:function(){
 		var mysql=require('mysql');
-		var db=mysql.createConnection({
-			host     : process.env.MYSQL_HOST,
-		    port     : process.env.MYSQL_PORT,
-		    user     : process.env.ACCESSKEY,
-		    password : process.env.SECRETKEY,
-		    database : 'app_' + process.env.APPNAME
-		});
-		db.connect();
-		this.db=db;
+		if(!this.db){
+			var db=mysql.createConnection({
+				// host:C.DB_HOST,
+				// user:C.DB_USER,
+				// password:C.DB_PASS,
+				// database:C.DB_NAME
+			 	host     : process.env.MYSQL_HOST,
+			    port     : process.env.MYSQL_PORT,
+			    user     : process.env.ACCESSKEY,
+			    password : process.env.SECRETKEY,
+			    database : 'app_' + process.env.APPNAME
+			});
+			db.connect();
+			this.db=db;
+		}
 	},
 	/*查询*/ 
 	select:function(tableName,callback,where,field){
