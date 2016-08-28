@@ -32,51 +32,51 @@ application.use(function(req,res,next){
 
 /*socket*/ 
 var http=require("http").Server(application);
-// var socketIo=require("socket.io");
-// var io=socketIo(http);
-// //主程序
-// var onlineUsers={};
-// var onlineCount=0;
-// var names=C.NAMES;
-// var nameIndex=0;
-// io.on("connection",function(socket){
-// 	console.log("有人来了.....");
-// 	//初始化个人
-// 	var userObj={};
-// 	userObj.userName=names[nameIndex];
-// 	userObj.userId=F.createUserId();
-// 	socket.name=userObj.userId;
-// 	nameIndex++;
-// 	if(nameIndex>=names.length){
-// 		nameIndex=0;
-// 	}
-// 	//用户登录
-// 	socket.on("login",function(){
-// 		//判断是否存在
-// 		if(!onlineUsers.hasOwnProperty(userObj.userId)){
-// 			onlineUsers[userObj.userId]=userObj.userName;
-// 			onlineCount++;
-// 		}
-// 		io.emit("clientLogin",{username:userObj.userName,userid:userObj.userId});
-// 		console.log(userObj.userName+"加入聊天.....");
-// 	});
-// 	//用户信息
-// 	socket.on("message",function(mesObj){
-// 		mesObj['time']=F.phpDate("y年m月d日 h:i:s");
-// 		console.log(mesObj.userName+"说："+mesObj.content);
-// 		io.emit("clientMessage",mesObj);
-// 	});
-// 	//用户退出
-// 	socket.on("disconnect",function(){
-// 		if(onlineUsers.hasOwnProperty(socket.name)){
-// 			var userObj={userId:socket.name,userName:onlineUsers[socket.name]};
-// 			delete onlineUsers[socket.name];
-// 			onlineCount--;
-// 			io.emit("clientLoginOut",{username:userObj.userName});
-// 			console.log(userObj.userName+"退出聊天室");
-// 		}
-// 	})
-// });
+var socketIo=require("socket.io");
+var io=socketIo(http);
+//主程序
+var onlineUsers={};
+var onlineCount=0;
+var names=C.NAMES;
+var nameIndex=0;
+io.on("connection",function(socket){
+	console.log("有人来了.....");
+	//初始化个人
+	var userObj={};
+	userObj.userName=names[nameIndex];
+	userObj.userId=F.createUserId();
+	socket.name=userObj.userId;
+	nameIndex++;
+	if(nameIndex>=names.length){
+		nameIndex=0;
+	}
+	//用户登录
+	socket.on("login",function(){
+		//判断是否存在
+		if(!onlineUsers.hasOwnProperty(userObj.userId)){
+			onlineUsers[userObj.userId]=userObj.userName;
+			onlineCount++;
+		}
+		io.emit("clientLogin",{username:userObj.userName,userid:userObj.userId});
+		console.log(userObj.userName+"加入聊天.....");
+	});
+	//用户信息
+	socket.on("message",function(mesObj){
+		mesObj['time']=F.phpDate("y年m月d日h:i:s");
+		console.log(mesObj.userName+"说："+mesObj.content);
+		io.emit("clientMessage",mesObj);
+	});
+	//用户退出
+	socket.on("disconnect",function(){
+		if(onlineUsers.hasOwnProperty(socket.name)){
+			var userObj={userId:socket.name,userName:onlineUsers[socket.name]};
+			delete onlineUsers[socket.name];
+			onlineCount--;
+			io.emit("clientLoginOut",{username:userObj.userName});
+			console.log(userObj.userName+"退出聊天室");
+		}
+	})
+});
 
 /*创建服务器*/
 var appPort=process.env.VCAP_APP_PORT || C.APP_PORT;

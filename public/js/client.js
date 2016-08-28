@@ -1,5 +1,5 @@
 var Client={
-	url:"ws://1.nodejsblog.applinzi.com",
+	url:"ws://localhost:5050",
 	socket:null,
 	userId:0,
 	userName:"",
@@ -17,7 +17,7 @@ var Client={
 		this.socket.on("clientLogin",function(res){
 			$this.userName=res.username;
 			$this.userId=res.userid;
-			var html='<div class="chatLogin"><span class="cirtcle">'+res.username+'上线了</span></div>';
+			var html='<div class="chatLogin"><span class="cirtcle">'+res.username+' 连接成功</span></div>';
 			$('.nbCommentArea').prepend(html);
 		});
 		this.userSubmitChatMessage();
@@ -51,7 +51,7 @@ var Client={
 	//用户退出
 	userLoginOut:function(){
 		this.socket.on("clientLoginOut",function(res){
-			var html='<div class="chatLogin"><span class="cirtcle">'+res.username+'退出了</span></div>';
+			var html='<div class="chatLogin"><span class="cirtcle">'+res.username+' 连接断开！</span></div>';
 			$('.nbCommentArea').prepend(html);
 		});		
 	},
