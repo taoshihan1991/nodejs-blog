@@ -1,0 +1,29 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<style type="text/css">
+		body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+		#chatBtn{
+			position: fixed;
+			z-index: 100;
+			left: 0;
+			top: 0;
+		}
+	</style>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=nZs75slzWpQGsIaloDGpGCGA"></script>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	<script type="text/javascript" src="Geolocation.js"></script>
+	<script type="text/javascript" src="Client.js"></script>
+	<title>实时在线-TSH</title>
+</head>
+<body>
+	<div id="allmap"></div>
+	<input type="text" id="chatBtn"  placeholder="在此输入文字回车提交"/>
+</body>
+</html>
+<script type="text/javascript">
+	Geolocation.init();
+	Client.init();
+</script>
